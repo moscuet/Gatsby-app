@@ -33,21 +33,30 @@ or $ npm run build & npm run serve (single line command)
 help: npx gatsby -h ( add npx prior to any gatsby command)
 
 
-//  when open a gatsby app frov vs code:
+//  when open a gatsby app from vs code:
 
-run from terminal: $ npm run build & npm run serve
+run from terminal: 
+             1.$ npm run develop
 
 
 To stop running that process (or to “stop running the development server”), go back to your terminal window, hold down the “control” key, and then hit “c” (ctrl-c). To start it again-
      $ npm run develop
 
+// together two command: $ npm run build & npm run serve
 
-documentation:
-  link external source: < a href=‘’> linkied-page</>
+
+==================================   documentation ===========================
+
+
+##  linking pages:
+ 
+ link external source: < a href=‘’> linkied-page</>
   link to other page: < link href=‘./about’> About-page </>
 
 
-styling with scss:
+##  styling with scss:
+
+
   01. install plugin: npm install node-sass gatsby-plugin-sass
   02.config plug-in: create root-file:gatsby-config.js > module.exports = {plugins: ['gatsby-plugin-sass'] }
   03. create-root-folder: styles > index.scss
@@ -77,6 +86,71 @@ if it doesnt work then repeat step 2,3,4:
 
 ## sourcing content from the file system
 
+  1. create: src > [Folder] > file.md
+  2. pluggin: gatsby-source-filesystem: $ npm install --save gatsby-source-filesystem 
+  3. update gatsby-config.js file in root-directory: 
+     add folowing to pluggins array : {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `src`,
+        path: `${__dirname}/src/`,
+      }
+ 4. npm run develop
+ 5. refresh graphql and make a quarey and inspect:
+fisrt check DOCS if it has added files(..)…File and allFile(…)FileConnection then inspect query: 
+query{
+  allFile {
+    edges {
+      node {
+        name
+        extension
+        dir
+        modifiedTime
+      }
+    }
+  }
+}
 
+
+
+### Markdown File in to HTML
+
+	need a plugin to look for markdown and convert it to useful data: gatsby-transformer-remark
+      1. $ npm install --save gatsby-transformer-remark
+      2. add toplugin array inside gatsby-config.js file: ‘gatsby-transformer-remark’
+      3. npm run develop
+      4. check if DOCS addde markdownRemark and allMark….
+
+      5. queary 01: 
+ query{
+  allMarkdownRemark {
+    edges {
+      node{
+        frontmatter{
+          title,
+          date
+        }
+      } 
+    }
+  }
+}
+
+     5. queary 02. 
+ query{
+  allMarkdownRemark {
+    edges {
+      node{
+        html,
+        excerpt
+      } 
+    }
+  }
+
+  6. using query data in blog.js
+   a. import {graphql, useStaticQuery} from 'gatsby'
+ then extract data using query and use it
+
+
+## generating slugs for post
 
 
