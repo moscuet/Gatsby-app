@@ -1,0 +1,82 @@
+Node.js v12.16.2 to /usr/local/bin/node
+npm v6.14.4 to /usr/local/bin/npm
+
+
+
+
+check version: 
+       $ npm -v
+       $ node -v
+
+install Xcode: 
+       $ xcode-select --install
+
+install gatsby cli:
+       $ npm install -g gatsby-cli
+
+if doesn’t work, follow this: https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
+
+create gatsby app:
+
+// global option doesn’t work so use npx:
+       $ cd directory
+       $ npx gatsby new gatsby-app https://github.com/gatsbyjs/gatsby-starter-hello-world
+       $ cd gatsby-app
+
+$ npm run develop
+$ npm run build
+$ npm run serve
+
+or run every time update code: $ npm run build ==> $ npm run serve 
+or $ npm run build & npm run serve (single line command)  
+
+help: npx gatsby -h ( add npx prior to any gatsby command)
+
+
+//  when open a gatsby app frov vs code:
+
+run from terminal: $ npm run build & npm run serve
+
+
+To stop running that process (or to “stop running the development server”), go back to your terminal window, hold down the “control” key, and then hit “c” (ctrl-c). To start it again-
+     $ npm run develop
+
+
+documentation:
+  link external source: < a href=‘’> linkied-page</>
+  link to other page: < link href=‘./about’> About-page </>
+
+
+styling with scss:
+  01. install plugin: npm install node-sass gatsby-plugin-sass
+  02.config plug-in: create root-file:gatsby-config.js > module.exports = {plugins: ['gatsby-plugin-sass'] }
+  03. create-root-folder: styles > index.scss
+  04. clasname in css-file: .class-name {} but in component: className = {className}
+
+raw css: links.mead.io/gatsbystyles
+
+## graphQL: http://localhost:8000/___graphql
+
+
+##graphiql playground instead of graphiql:  Setup:
+
+  1. create a file in root name: .env.development
+  2. npm install --save-dev env-cmd
+  3. then modify packagejson: ‘develop’: “gatsby develop” ==> ‘develop’:  “env-cmd .env.development  gatsby develop”
+   4. npm run develop
+if it doesnt work then repeat step 2,3,4: 
+      2. change file name to .env from .env.development
+      3. remove .env.development (‘develop’:  “env-cmd  gatsby develop”
+      4. $ npm run develop
+    or,
+       2.keep filename same: .env.development
+       3. change here in package json: "develop": "env-cmd -f .env.development gatsby develop" // -f is a file path specifier
+       4. $ npm run develop
+          
+  
+
+## sourcing content from the file system
+
+
+
+
