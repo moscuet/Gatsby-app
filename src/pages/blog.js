@@ -1,36 +1,42 @@
-import React from "react"
-import Footer from '../components/footer'
-import Header from '../components/header'
+import React from 'react'
+import { Link, graphql, useStaticQuery } from 'gatsby'
+
 import Layout from '../components/layout'
 
-import {graphql, useStaticQuery} from 'gatsby'
 
-
+//goal : linlk to blog post
+//1. fetch the slug for posts
+//use slug to generate a link
 const BlogPage = () => {
     const data = useStaticQuery(graphql`
-    query{
-        allMarkdownRemark {
-          edges {
-            node{
-                frontmatter{
-                    title
-                    date
+        query {
+            allMarkdownRemark {
+                edges {
+                    node {
+                        frontmatter {
+                            title
+                            date
+                        }
+                        fields {
+                            slug
+                        }
+                    }
                 }
-      
-            } 
-          }
+            }
         }
-      }`)
+    `)
 
     return (
         <Layout>
-             <h1> Blogg </h1>
+            <h1>Blog</h1>
             <ol>
-                {data.allMarkdownRemark.edges.map( (edge) =>{
-                    return(
+                {data.allMarkdownRemark.edges.map((edge) => {
+                    return (
                         <li>
-                             <h1>{ edge.node.frontmatter.title }</h1>
-                             <p> { edge.node.frontmatter.date }</p>
+                            <Link to={`/blog/${edge.node.fields.slug}`}>
+                                <h2>{edge.node.frontmatter.title}</h2>
+                                <p>{edge.node.frontmatter.date}</p>
+                            </Link>
                         </li>
                     )
                 })}
@@ -38,4 +44,4 @@ const BlogPage = () => {
         </Layout>
     )
 }
-export default BlogPage  
+export default BlogPage

@@ -8,5 +8,5 @@ Practicing Gatsby Tutorial
 
 ## Content
 1. Gatsby
-2.React
-3.GraphQL
+2. React
+3. GraphQL
